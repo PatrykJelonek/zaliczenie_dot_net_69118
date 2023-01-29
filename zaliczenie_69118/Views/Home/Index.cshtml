@@ -1,0 +1,146 @@
+﻿@model zaliczenie_69118.Models.Order
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<section class="hero">
+    <div class="hero__title-bg">
+        <h2 class="hero__title">
+            Speciality Coffee Subscription
+        </h2>
+    </div>
+</section>
+
+<section class="how-its-working container">
+    <div class="row g-0">
+        <div class="col-12">
+            <h2 class="how-its-working__title">How it's working</h2>
+        </div>
+    </div>
+
+    <div class="row g-0">
+        <ul class="how-its-working__list">
+            <li class="how-its-working__item col-12 col-lg-4">Fill out our form and pay</li>
+            <li class="how-its-working__item col-12 col-lg-4">Wait for a package</li>
+            <li class="how-its-working__item col-12 col-lg-4">Enjoy special selected coffee each month</li>
+        </ul>
+    </div>
+</section>
+
+<section class="subscription-form">
+    <div class="row">
+        <div class="col-12 col-lg-6 subscription-form__title-bg">
+            <div class="subscription-form__title-bg-filter">
+                <h2 class="substription-form__title">Subscribe our selected coffies</h2>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6">
+            <div class="container form-container">
+                <form asp-controller="Order" asp-action="Create">
+                    <div class="row">
+                        <div class="col-12 brewing-methods">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3 class="subscription-form__subtitle">Brewing Method</h3>
+                                </div>
+                            </div>
+
+                            <div class="form-check form-check-inline pl-1">
+                                <input class="form-check-input form-check-input--hidden" type="radio" name="BrewingMethod" id="brewing-method-alternative" value="alternative" checked>
+                                <label asp-for="BrewingMethod" class="form-check-label" for="brewing-method-alternative">
+                                    <div class="custom-checkbox">
+                                        <strong>Alternative</strong>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input form-check-input--hidden" type="radio" name="BrewingMethod" id="brewing-method-espresso" value="espresso">
+                                <label asp-for="BrewingMethod" class="form-check-label" for="brewing-method-espresso">
+                                    <div class="custom-checkbox">
+                                        <strong>Espresso</strong>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-12 grammage">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3 class="subscription-form__subtitle">Grammage</h3>
+                                </div>
+                            </div>
+
+                            <div class="form-check form-check-inline pl-1">
+                                <input asp-for="Grammage" class="form-check-input form-check-input--hidden" type="radio" name="Grammage" id="grammage-1" value="250" checked>
+                                <label class="form-check-label" for="grammage-1">
+                                    <div class="custom-checkbox">
+                                        <strong>1 x 250g</strong>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="Grammage" class="form-check-input form-check-input--hidden" type="radio" name="Grammage" id="grammage-2" value="500">
+                                <label class="form-check-label" for="grammage-2">
+                                    <div class="custom-checkbox">
+                                        <strong>2 x 250g</strong>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="Grammage" class="form-check-input form-check-input--hidden" type="radio" name="Grammage" id="grammage-3" value="750">
+                                <label class="form-check-label" for="grammage-3">
+                                    <div class="custom-checkbox">
+                                        <strong>3 x 250g</strong>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3 class="subscription-form__subtitle">Delivery Address</h3>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Fullname</label>
+                                <input asp-for="FullName" type="text" name="FullName" class="form-control form-control-lg" id="exampleFormControlInput1" placeholder="John Doe" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Email</label>
+                                <input asp-for="Email" type="email" name="Email" class="form-control form-control-lg" id="exampleFormControlInput1" placeholder="name@example.com" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Address</label>
+                                <input asp-for="Address" type="text" name="Address" class="form-control form-control-lg" id="exampleFormControlInput1" placeholder="Alternative 3, 32-112 London" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-5">
+                        <button type="submit" class="btn btn-success submit-button">Subscribe <span class="subscription-cost" id="subscription-cost">19.99</span>$</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>const subscriptionBasePrice = 19.99;
+    const subscriptionCost = document.querySelector('#subscription-cost');
+    const grammageCheckboxes = document.querySelectorAll('input[name="Grammage"]');
+
+
+    grammageCheckboxes.forEach((checkbox) => {
+        let numberOfPackages = parseInt(checkbox.value) / 250;
+
+        checkbox.addEventListener('change', (e) => {
+            subscriptionCost.innerText = (parseFloat(numberOfPackages) * subscriptionBasePrice).toFixed(2);
+        })
+    });</script>

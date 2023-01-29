@@ -1,0 +1,71 @@
+@model zaliczenie_69118.Models.Order;
+
+@{
+    ViewData["Title"] = "Oder no. " + Model?.Id;
+}
+
+<div class="row thanks-row @(ViewBag.withThanksHeader ? "" : "visually-hidden")">
+    <div class="col-12 thanks-container">
+        <p class="thanks-container__text">Thanks for order</p>
+    </div>
+</div>
+
+<h1>Oder no. @Model?.Id</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BrewingMethod)
+        </dt>
+        <dd class="col-sm-10 text-capitalize">
+            @Html.DisplayFor(model => model.BrewingMethod)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Grammage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Grammage) g
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price) $
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class="col-sm-10 text-capitalize">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="@(ViewBag.withThanksHeader ? "visually-hidden" : "")">Edit |</a>
+    <a asp-action="Index" class="@(ViewBag.withThanksHeader ? "visually-hidden" : "")">Back to List</a>
+</div>
