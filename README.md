@@ -1,1 +1,2 @@
-# zaliczenie_dot_net_69118
+# Zaliczenie przedmiotu: 
+### `Programowanie aplikacji webowych z wykorzystaniem platformy.net`
